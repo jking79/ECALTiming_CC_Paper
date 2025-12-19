@@ -1,0 +1,31 @@
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+
+# Latexmk / build dirs
+_build/
+build/
+latex.out/
+
+# Minted / pygments
+_minted*/
+*.pyg
+
+# OS/editor junk
+.DS_Store
+*.swp
+

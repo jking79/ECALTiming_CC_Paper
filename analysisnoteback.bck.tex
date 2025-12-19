@@ -1,0 +1,159 @@
+\documentclass{cmspaper}
+\usepackage{placeins}
+\usepackage{subfig}
+\usepackage{graphicx}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage[backend=biber,style=ieee,citestyle=numeric-comp,sorting=none]{biblatex}
+%\usepackage[backend=biber,style=chem-angew,citestyle=numeric-comp,sorting=none]{biblatex}
+%\ package 'overpic' for plot test manipulation
+%\usepackage[backend=biber,style=alphabetic,sorting=ynt]{biblatex}
+\addbibresource{jwkbiblio.bib} %Imports bibliography file
+
+\begin{document}
+
+%==============================================================================
+% title page for few authors
+
+\begin{titlepage}
+
+% select one of the following and type in the proper number:
+   \cmsnote{2020/000}
+%  \internalnote{2005/000}
+%  \conferencereport{2005/000}
+   \date{1 September 2020}
+
+  \title{Studies of ECAL Timing Reconstruction}
+
+  \begin{Authlist}
+    %A.~Author, B.~Author, C.~Author\Aref{a}
+       %\Instfoot{cern}{CERN, Geneva, Switzerland}
+    J.~King\Aref{a}, N.~Minafra\Aref{b}, C.~Rogan\Aref{c}
+       \Instfoot{ku}{University of Kansas, Lawrence KS, USA}
+       %\Instfoot{ieph}{Institute of Experimental Physics, Hepcity, Wonderland}
+  \end{Authlist}
+
+% if needed, use the following:
+\collaboration{Flying Saucers Investigation Group}
+%\collaboration{CMS collaboration}
+
+  \Anotfoot{a}{At home}
+  \Anotfoot{b}{At home near CERN, Geneva, Switzerland}
+  \Anotfoot{b}{At home with puppies}
+
+  \begin{abstract}
+  \centering
+    To be added at a late time.
+    %This is a template written in LaTeX,
+    %processed with {\it cmspaper.cls} document class.
+    %It is based on the {\it cernart.cls} and {\it articlet.cls} classes.
+    %The above information, Title and Abstract, should be readable on any 
+    %computer and should be searchable on the information server. 
+    %Therefore if the abstract or the title of your note contains Greek 
+    %characters and mathematical symbols, please send to the CMS secretariat 
+    %alternative versions which do not contain such characters.
+  \end{abstract} 
+
+% if needed, use the following:
+%\conference{Presented at {\it Physics Rumours}, Coconut Island, April 1, 2005}
+%\submitted{Submitted to {\it Physics Rumours}}
+\note{Preliminary version}
+  
+\end{titlepage}
+
+\setcounter{page}{2}%JPP
+
+%==============================================================================
+% title page for many authors
+%
+%\begin{titlepage}
+%  \internalnote{2005/000}
+%  \title{CMS Technical Note Template}
+%
+%  \begin{Authlist}
+%    A.~Author\Iref{cern}, B.~Author\Iref{cern}, C.~Author\IAref{cern}{a},
+%    D.~Author\IIref{cern}{ieph}, E.~Author\IIAref{cern}{ieph}{b},
+%    F.~Author\Iref{ieph}
+%  \end{Authlist}
+%
+%  \Instfoot{cern}{CERN, Geneva, Switzerland}
+%  \Instfoot{ieph}{Institute of Experimental Physics, Hepcity, Wonderland}
+%  \Anotfoot{a}{On leave from prison}
+%  \Anotfoot{b}{Now at the Moon}
+%
+%  \begin{abstract}
+%    This is a template of a CMS paper, written in LaTeX,
+%    processed with {\it cmspaper.sty} style.
+%    It is based on the {\it cernart.sty} and {\it articlet.sty} styles.
+%    There are two versions of the title page.
+%    The current one is designed for many authors.
+%    The one on the previous page is for few authors.
+%    Just delete the one which you do not need.
+%  \end{abstract} 
+%  
+%\end{titlepage}
+%
+%==============================================================================
+
+%\tableofcontents
+\pagebreak
+
+%\section{Outline \label{sec:outline}}
+%\input{tex/outline.tex}
+%\pagebreak
+
+\section{Introduction \label{sec:intro}}
+\input{tex/Intro_s1}
+\FloatBarrier
+
+\section{ECAL Time \& Energy Reconstruction \label{sec:reco}}
+\input{tex/TimeEnergyReco_s2}
+%\FloatBarrier
+ 
+\subsection{ECAL Time Resolution \label{sec:reso}}
+\input{tex/Method_s3}
+%\FloatBarrier
+
+\section{ECAL Timing Algorithms and OOT Pile-up Challenges \label{sec:motive}}
+\input{tex/TimeAlgosMotive_s5}
+%\FloatBarrier
+
+\subsection{Ratio Time Algorithm\label{sec:algos}}
+\input{tex/Ratio_s4}
+%\FloatBarrier
+
+\subsection{Monte Carlo Truth Times\label{sec:gen}}
+\input{tex/GenStudies_s7}
+\FloatBarrier
+
+\section{Cross Correlation Time Algorithm\label{sec:algos}}
+\input{tex/TimeAlgos_s6}
+%\FloatBarrier
+
+\pagebreak
+\FloatBarrier
+
+%\section{Summary \label{sec:conclusion}}
+%\input{tex/Conclusion_s9}
+%\FloatBarrier
+
+\appendix
+\section {Ratio \& CC Run 2 Time Resolution\label{sec:results}}
+\input{tex/Results_s8}
+\FloatBarrier
+
+\pagebreak
+\medskip
+\printbibliography[heading=bibnumbered,title={References}] 
+%Prints the entire bibliography with the titel "Whole bibliography"
+
+%\clearpage
+%Filters bibliography
+%\printbibliography[heading=subbibintoc,type=article,title={Articles only}]
+%\printbibliography[type=book,title={Books only}]
+%\printbibliography%[keyword={physics},title={Physics-related only}]
+%\printbibliography[keyword={latex},title={\LaTeX-related only}]
+
+\end{document}

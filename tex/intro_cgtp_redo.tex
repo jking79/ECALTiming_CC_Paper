@@ -1,0 +1,55 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{cite}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Title of the Full Document}
+\author{Author Name}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+% This is the Introduction section of a larger document
+\section{Introduction}
+The main goal of the Compact Muon Solenoid (CMS) experiment---one of the general-purpose detectors of the Large Hadron Collider (LHC) at CERN---is to explore particle physics at the TeV energy scale. The electromagnetic calorimeter (ECAL), one of the subdetectors of CMS, measures the energy of electrons and photons produced in LHC collisions~\cite{CMS:2008xjf}.
+
+After Run 3 of the LHC, a significant upgrade is planned for the High-Luminosity LHC (HL-LHC) era~\cite{Apollinari:2015wtw}. The expected instantaneous luminosity during HL-LHC operations will be approximately a factor of five greater than the nominal LHC design luminosity. While these conditions will enable the LHC experiments to collect datasets more than an order of magnitude larger than in all previous runs, they also exacerbate the challenge of reconstructing events with hundreds of simultaneous proton--proton interactions (pile-up).
+
+To mitigate the degradation in event reconstruction performance caused by high pile-up (PU), both CMS~\cite{Butler:2019rpu} and ATLAS~\cite{Morgenstern:2019xto} are incorporating precision timing capabilities into their upgraded detector systems. These include the Minimum Ionizing Particle Timing Detector (MTD) and the High Granularity Calorimeter (HGCAL) for CMS, along with upgrades to existing detectors such as the ECAL. Precision timing enables \textbf{4D event reconstruction}, where spatial and temporal information are used simultaneously to improve object association and pile-up suppression. Such techniques will also expand sensitivity to long-lived particle (LLP) signatures and other exotic physics phenomena.
+
+The CMS ECAL aims to achieve a time resolution of approximately 30~ps in the HL-LHC era~\cite{Bruneliere:2006ra}, building on its existing capability for high-precision timing measurements.
+
+\subsection{The CMS Electromagnetic Calorimeter}
+The ECAL is a hermetic, homogeneous calorimeter composed of 75,848 lead tungstate (PbWO$_4$) scintillating crystals arranged in a barrel (EB) and two endcap (EE) sections~\cite{CMS:1997ema}. Lead tungstate provides a fast scintillation response and strong radiation hardness. The material has a density of 8.3~g/cm$^3$, a radiation length of $X_0 = 0.89$~cm, and a Moli\`ere radius of $R_M = 2.0$~cm, allowing for a compact, highly granular detector design. Each crystal is a truncated pyramid with a lateral size comparable to $R_M$ and a length of 25.8 $X_0$ in the barrel and 24.7 $X_0$ in the endcaps.
+
+When an electromagnetic particle deposits energy in a crystal, a burst of scintillation light is produced. The PbWO$_4$ scintillation decay time is comparable to the 25~ns LHC bunch-crossing interval, with approximately 80\% of the light emitted within that time window. The scintillation light is detected by avalanche photodiodes (APDs) in the barrel and vacuum phototriodes (VPTs) in the endcaps~\cite{Bayatian:2006nff}.
+
+\subsection{Timing and Pile-Up Sensitivity}
+While the primary function of the ECAL is to measure the energy of photons and electrons, the combination of the PbWO$_4$ scintillation timescale, electronic pulse shaping, and digitization rate allows the ECAL to achieve excellent time resolution. This timing resolution directly affects the calorimeter's energy resolution and plays an important role in many physics analyses.
+
+Precise timing helps reject backgrounds with broad time distributions, such as cosmic rays, beam-halo muons, electronic noise, secondary interactions within detector material, and out-of-time proton--proton collisions~\cite{Bruneliere:2006ra}. Timing is also crucial for identifying delayed energy deposits from long-lived particle (LLP) decays, where decay products arrive later than prompt photons or electrons.
+
+The time reconstruction is sensitive to scintillation pulses in a crystal that may originate from pile-up (PU) interactions other than the primary collision being reconstructed. In particular, \textbf{out-of-time pile-up (OOT-PU)} arises from collisions in preceding or following LHC bunch crossings. As luminosity increases in the HL-LHC era, OOT-PU will significantly impact ECAL timing performance---both by degrading time resolution and by limiting the ability to reject background events.
+
+To prepare for high-pile-up operation, it is essential to develop timing reconstruction algorithms that are OOT-PU--aware and capable of mitigating these effects. Improved reconstruction will not only enhance the precision of existing physics measurements but will also support the ECAL?s role in achieving the $\sim$30~ps resolution goal required for 4D reconstruction at the HL-LHC.
+
+\subsection{Outline of the Paper}
+In this paper, we present time reconstruction methods for the CMS ECAL. Section 2 describes the algorithms used for time extraction. Section 2.1 reviews the previous reconstruction method (the ratio method) and its limitations. Section 2.2 introduces a new timing algorithm based on the cross-correlation method, discussing its parameters, the rejection of anomalous ?spike? signals (Section \ref{sec:resspkdata}), and its sensitivity to out-of-time energy deposits (Section \ref{sec:recobias}). Section 3 presents the performance of the cross-correlation method on data, and Section 4 summarizes the results.
+
+\section*{References}
+\begin{thebibliography}{9}
+\bibitem{CMS:2008xjf} CMS Collaboration, \textit{The CMS experiment at the CERN LHC}, JINST 3 (2008) S08004.
+\bibitem{Apollinari:2015wtw} G.~Apollinari et al., \textit{High-Luminosity LHC design report}, CERN-2015-005, DOI:10.5170/CERN-2015-005.
+\bibitem{Butler:2019rpu} CMS Collaboration, \textit{CMS Phase-2 Upgrade Technical Design Report}, CERN-LHCC-2017-009, CMS-TDR-014.
+\bibitem{Morgenstern:2019xto} ATLAS Collaboration, \textit{ATLAS HL-LHC upgrades overview}, JINST 15 (2020) T08007.
+\bibitem{Bruneliere:2006ra} CMS Collaboration, \textit{ECAL timing performance}, CMS-NOTE-2006-046.
+\bibitem{CMS:1997ema} CMS Collaboration, \textit{ECAL Technical Design Report}, CERN-LHCC-97-033.
+\bibitem{Bayatian:2006nff} CMS Collaboration, \textit{CMS Physics TDR Vol. I (Detector Performance)}, CERN-LHCC-2006-001.
+\end{thebibliography}
+
+\end{document}
