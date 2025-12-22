@@ -1,121 +1,136 @@
 \documentclass{cmspaper}
+
+%------------------------------------------------------------------------------
+% Packages
+%------------------------------------------------------------------------------
 \usepackage{placeins}
 \usepackage{subfig}
 \usepackage{graphicx}
 \usepackage{lineno}
+\usepackage{amsmath}
 
 \usepackage[dvipsnames]{xcolor}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
-%\usepackage{csquotes}
-
-\usepackage [english]{babel}
-\usepackage [autostyle, english = american]{csquotes}
+\usepackage[autostyle, english = american]{csquotes}
 \MakeOuterQuote{"}
-%\usepackage[backend=biber,style=ieee,citestyle=numeric-comp,sorting=none]{biblatex}
-%usepackage[backend=biber,style=chem-angew,citestyle=numeric-comp,sorting=none]{biblatex}
-%\ package 'overpic' for plot test manipulation
-%\usepackage[backend=biber,style=alphabetic,sorting=ynt]{biblatex}
-\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+
+\usepackage[
+  backend=biber,
+  style=numeric,
+  sorting=none
+]{biblatex}
 \addbibresource{jwkbiblio.bib}
 
+%------------------------------------------------------------------------------
 \begin{document}
+%------------------------------------------------------------------------------
 
 %==============================================================================
-% title page for few authors
-
+% Title page
+%==============================================================================
 \begin{titlepage}
 
-% select one of the following and type in the proper number:
-%\cmsnote{2022/075}
-%\internalnote{2005/000}
-%\conferencereport{2005/000}
-\title{Paper Draft}
+\title{Studies of ECAL Timing Reconstruction}
 \date{30 May 2025}
 
-\title{Studies of ECAL Timing Reconstruction }
-
 \begin{Authlist}
-    %A.~Author, B.~Author, C.~Author\Aref{a}
-       %\Instfoot{cern}{CERN, Geneva, Switzerland}
-    J.~King, N.~Minafra, C.~Rogan
-       \Instfoot{ku}{University of Kansas, Lawrence KS, USA}
-       %\Instfoot{ieph}{Institute of Experimental Physics, Hepcity, Wonderland}
+  J.~King, N.~Minafra, C.~Rogan
+  \Instfoot{ku}{University of Kansas, Lawrence, KS, USA}
 \end{Authlist}
 
-% if needed, use the following:
-\collaboration{CMS collaboration}
+\collaboration{CMS Collaboration}
 
+%------------------------------------------------------------------------------
 \begin{abstract}
 \centering
-One of the most exciting elements of the future CMS detector anticipated for the High Luminosity LHC (HL-LHC) era, will be the incorporation of precision timing. A combination of new sub-detectors (MTD, HGCAL) and dedicated upgrades to existing detectors, such as the ECAL, will facilitate 4D reconstruction of events. 4D reconstruction methods will provide new tools for both pile-up suppression and a range of new experimental techniques to probing physics signatures and long-lived particles. To facilitate the incorporation of precision timing in the HL-LHC era, studies of the ECAL timing reconstruction were conducted and a new time reconstruction, the Cross Correlation Time Algorithm ( CC ), was developed. The CC algorithm mitigates the effects of out-of-time pileup on the ECAL time reconstruction by leveraging the existing, pile-up aware, ECAL energy reconstruction method. In order to measure the performance of this new algorithm, refinements to existing methods to determine timing resolution and new methods to determine approximate GEN truth times were developed. The CC algorithm is shown to improve the single crystal resolution by $\sim$30 ps over the Run II default method and is expected to achieve analysis relevant E/Gamma object resolutions of $\sim$100 ps, compared to $\sim$300 ps typical in Run II. With the utilization of the CC algorithm we expect comparable, if not improved, resolutions in Run III.
+Precise timing measurements in the CMS electromagnetic calorimeter (ECAL) provide powerful discrimination against pileup and enhance sensitivity to physics signatures involving nonprompt and delayed particles.
+However, the default Run~II ECAL time reconstruction, based on the ratio method, is susceptible to degradation from out-of-time pileup.
+In this work, a cross-correlation (CC) timing algorithm is introduced that exploits the pileup-aware ECAL energy reconstruction to improve time determination at both the crystal and object levels.
+The performance of the CC algorithm is evaluated using proton--proton collision data and simulation, employing refined timing resolution measurements and new methods to estimate approximate generator-level truth times.
+Relative to the Run~II default method, the CC algorithm improves the single-crystal time resolution by approximately 30~ps.
+At the object level, electron and photon time resolutions of order 100~ps are achieved, compared to typical Run~II values of approximately 300~ps.
+These results demonstrate that substantially improved ECAL timing performance is achievable with the current detector, and motivate the adoption of the CC algorithm as the default ECAL timing reconstruction for Run III and future precision-timing applications.
+\end{abstract}
+%------------------------------------------------------------------------------
 
-%The time resolutions achievable with the CC algorithm will improve the sensitivity of LLP searches, allowing them to be sensitive to ctaus  down to ~ 3 cm from the ~ 10 cm achievable currently.  
-
-%While not yet approaching the planned future precision and coverage for timing, recent improvements to the ECAL timing reconstruction using a new algorithm, the cross-correlation method ( CC ), will allow for some parts of this 4D future to be realized in Run III. 
-
-%With the improvements provided by the CC algorithm in  mind, a method to time stamp vertices by constructing a jet time is being studied.  This method shows the potential to match the time resolution achievable to real world physics objects in the ECAL that, with the CC algorithm, would allow the time stamping of vertices with ~ 100 ps resolution using the current detector in Run II. With this method we expect to time stamp vertices to  a comparable, if not improved, resolution in Run III.
-\end{abstract} 
-
-% if needed, use the following:
-%\conference{Presented at {\it Physics Rumours}, Coconut Island, April 1, 2005}
-%\submitted{Submitted to {\it Physics Rumours}}
 \note{Preliminary version}
-  
+
 \end{titlepage}
 
-\setcounter{page}{2}%JPP
+%------------------------------------------------------------------------------
+% Main content
+%------------------------------------------------------------------------------
+\setcounter{page}{2}
 \tableofcontents
-\pagebreak
+\clearpage
 \linenumbers
 
-\section{Introduction \label{sec:intro}}
-\input{tex/intro}%redone
+%------------------------------------------------------------------------------
+\section{Introduction}
+\label{sec:intro}
+\input{tex/intro}
 \FloatBarrier
 
-\section{ECAL Time Reconstruction Algorithms \label{sec:algo}}
-\input{tex/time_reco}%redone
-\FloatBarrier
-\subsection{Ratio Time Reconstruction \label{sec:algo1}}
-%\subsection{Ratio Time Algorithm \label{sec:algo1}} 
-\input{tex/ratio_algo}%redone
-\FloatBarrier
-\subsection{Cross Correlation Time Algorithm \label{sec:algo2}}
-\input{tex/kucc_algo} %redone
-%\subsubsection{Slew Issue Correction \label{sec:algo21}}
-%\input{tex/kucc_slew}
-%\FloatBarrier
-\subsubsection{Delay Time Bias \label{sec:recobias}}
-\input{tex/kucc_delay_res}%redone
-\FloatBarrier
-\subsubsection{Spike Rejection Parameters \label{sec:resspkdata} }
-\input{tex/kucc_spike}%redone
-%\FloatBarrier
-%\subsection{Sensitivity of time reconstruction at delayed times to out-of-time amplitudes \label{sec:reslldata} }
-%\subsubsection{Truth Times \label{sec:resmeth2}}
-%\input{tex/mc_res}
+%------------------------------------------------------------------------------
+\section{ECAL Time Reconstruction Algorithms}
+\label{sec:algo}
+\input{tex/time_reco}
 \FloatBarrier
 
-\section{ECAL Timing Performance \label{sec:res}}
-\subsection{Resolution \label{sec:resmeth1}}
-\input{tex/meth_res}%redone
-\FloatBarrier
-\subsection{Calibration \label{sec:resmeth3}}
-\input{tex/cali_res}%redone
-\FloatBarrier
-\subsection{Performance of Cross Correlation Algorithm in Data \label{sec:resdata}}
-\input{tex/kucc_res}%redone
+\subsection{Ratio Time Reconstruction}
+\label{sec:algo1}
+\input{tex/ratio_algo}
 \FloatBarrier
 
-\section{Summary \label{sec:conclusion}}
+\subsection{Cross-Correlation Time Algorithm}
+\label{sec:algo2}
+\input{tex/kucc_algo}
+\FloatBarrier
+
+\subsubsection{Delay-Time Bias}
+\label{sec:recobias}
+\input{tex/kucc_delay_res}
+\FloatBarrier
+
+\subsubsection{Spike Rejection Parameters}
+\label{sec:resspkdata}
+\input{tex/kucc_spike}
+\FloatBarrier
+
+%------------------------------------------------------------------------------
+\section{ECAL Timing Performance}
+\label{sec:res}
+
+\subsection{Resolution}
+\label{sec:resmeth1}
+\input{tex/meth_res}
+\FloatBarrier
+
+\subsection{Calibration}
+\label{sec:resmeth3}
+\input{tex/cali_res}
+\FloatBarrier
+
+\subsection{Performance of the Cross-Correlation Algorithm in Data}
+\label{sec:resdata}
+\input{tex/kucc_res}
+\FloatBarrier
+
+%------------------------------------------------------------------------------
+\section{Summary}
+\label{sec:conclusion}
 \input{tex/conc}
 \FloatBarrier
 
-\pagebreak
-\FloatBarrier
-\medskip
-\printbibliography[heading=bibnumbered,title={References}] 
-%Prints the entire bibliography with the titel "Whole bibliography"
+%------------------------------------------------------------------------------
+\printbibliography[heading=bibnumbered,title={References}]
+%------------------------------------------------------------------------------
 
 \end{document}
 
+
+%Consistency checks to do later
+%Ensure ?cross-correlation (CC)? is defined once in the Introduction
+%Confirm that object-level resolutions in the abstract exactly match figures/tables
+%Make sure ?generator-level truth time? terminology is consistent with Section 3

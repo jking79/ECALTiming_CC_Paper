@@ -1,0 +1,130 @@
+\documentclass{cmspaper}
+\usepackage{placeins}
+\usepackage{subfig}
+\usepackage{graphicx}
+\usepackage{lineno}
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[autostyle, english = american]{csquotes}
+\MakeOuterQuote{"}
+
+\usepackage[backend=biber,style=ieee,citestyle=numeric-comp,sorting=none]{biblatex}
+\addbibresource{jwkbiblio.bib}
+
+\begin{document}
+
+%==============================================================================
+% Title page
+
+\begin{titlepage}
+
+\cmsnote{2022/075}
+\date{19 October 2021}
+
+\title{Studies of ECAL Timing Reconstruction}
+
+\begin{Authlist}
+    J.~King, N.~Minafra, C.~Rogan
+    \Instfoot{ku}{University of Kansas, Lawrence KS, USA}
+\end{Authlist}
+
+\collaboration{CMS Collaboration}
+
+\begin{abstract}
+\centering
+\begin{abstract}
+\centering
+Precise timing measurements in the CMS electromagnetic calorimeter (ECAL) provide powerful discrimination against pileup and enhance sensitivity to physics signatures involving nonprompt and delayed particles.
+However, the default Run~II ECAL time reconstruction, based on the ratio method, is susceptible to degradation from out-of-time pileup.
+In this work, a cross-correlation (CC) timing algorithm is introduced that leverages the existing pileup-aware ECAL energy reconstruction to improve time determination at the crystal and object levels.
+
+The performance of the CC algorithm is evaluated using proton--proton collision data and simulation, employing refined timing resolution measurements, generator-level time estimates, and offline calibrations.
+Relative to the Run~II default method, the CC algorithm improves the single-crystal time resolution by approximately 30~ps.
+At the object level, electron and photon time resolutions of order 100~ps are achieved, compared to typical Run~II values of approximately 300~ps.
+These results demonstrate that substantially improved ECAL timing performance is achievable with the current detector, with direct relevance for Run~III data taking and future precision timing applications.
+\end{abstract}
+
+\note{Preliminary version}
+
+\end{titlepage}
+
+\setcounter{page}{2}
+\tableofcontents
+\pagebreak
+\linenumbers
+
+\section{Introduction \label{sec:intro}}
+\input{tex/intro}
+\FloatBarrier
+
+\section{ECAL Reconstruction Methods \label{sec:reco}}
+\subsection{Energy Reconstruction \label{sec:reco1}}
+\input{tex/energy_reco}
+\FloatBarrier
+
+\subsection{Time Reconstruction \label{sec:reco2}}
+\input{tex/time_reco}
+\FloatBarrier
+
+\subsection{Object Reconstruction \label{sec:reco3}}
+\input{tex/object_reco}
+\FloatBarrier
+
+\subsection{LHC and ECAL Operations \label{sec:reco4}}
+\input{tex/lhc_reco}
+\FloatBarrier
+
+\section{ECAL Time Reconstruction Algorithms \label{sec:algo}}
+\subsection{Ratio Time Algorithm \label{sec:algo1}}
+\input{tex/ratio_algo}
+\FloatBarrier
+
+\subsection{Cross-Correlation Time Algorithm \label{sec:algo2}}
+\input{tex/kucc_algo}
+\FloatBarrier
+
+\section{ECAL Timing Performance \label{sec:res}}
+\subsection{Performance Measurement \label{sec:resmeth}}
+
+\subsubsection{Resolution \label{sec:resmeth1}}
+\input{tex/meth_res}
+\FloatBarrier
+
+\subsubsection{Truth Times \label{sec:resmeth2}}
+\input{tex/mc_res}
+\FloatBarrier
+
+\subsubsection{Calibration \label{sec:resmeth3}}
+\input{tex/cali_res}
+\FloatBarrier
+
+\subsection{Performance of the KUCC Algorithm in Data \label{sec:resdata}}
+\input{tex/kucc_res}
+\FloatBarrier
+
+\subsection{Performance of the KUCC Algorithm in Delayed-Time Simulation \label{sec:reslldata}}
+\input{tex/kucc_delay_res}
+\FloatBarrier
+
+\subsection{Performance of the KUCC Algorithm for Spike Rejection \label{sec:resspkdata}}
+\input{tex/kucc_spike}
+\FloatBarrier
+
+\section{Summary \label{sec:conclusion}}
+\input{tex/conc}
+\FloatBarrier
+
+\pagebreak
+\printbibliography[heading=bibnumbered,title={References}]
+
+\appendix
+\section{Run~II UL and Cross-Correlation Time Resolutions \label{sec:fullres}}
+\input{tex/full_res}
+
+\pagebreak
+\section{Approval Plots \label{sec:plots}}
+\input{tex/plots}
+
+\end{document}

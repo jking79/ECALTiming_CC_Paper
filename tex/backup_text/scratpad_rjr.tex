@@ -1,0 +1,70 @@
+%\subsection{Recursive jigsaw reconstruction}
+
+To characterize event kinematics in final states with significant missing transverse momentum ($\vec{p}_{\mathrm{T}}^{,\text{miss}}$) and additional non-prompt, displaced, or delayed signatures, we employ the Recursive Jigsaw Reconstruction (RJR) technique~\cite{Jackson_2017_RJR,Jackson_2017_SparticlesInMotion}, following the standard methodology developed and validated in previous ATLAS and CMS searches for pair-produced heavy states. The RJR framework interprets each event in terms of a hypothesized decay tree and constructs a set of approximate rest frames associated with intermediate states in the decay chain. Observables defined in these frames provide robust discrimination between signal topologies containing invisible particles and standard model (SM) backgrounds, while reducing sensitivity to jet multiplicity, object ordering, and details of the laboratory-frame recoil.
+
+%\subsubsection{Decay tree and event interpretation}
+
+The reconstruction is based on a decay tree motivated by the pair production of two heavy particles, each decaying into a visible and an invisible system, as commonly employed in RJR-based strong-production searches~\cite{ATLAS_2018_RJR_JetMET_36fb}. The event is interpreted in a proxy pair-production system (PP), which is decomposed as
+\begin{equation}
+\mathrm{PP} \to S, \qquad S \to P_a + P_b,
+\end{equation}
+with each parent system further partitioned into visible and invisible components,
+\begin{equation}
+P_{a,b} \to V_{a,b} + I_{a,b}.
+\end{equation}
+
+Jets passing the analysis-quality requirements form the baseline visible inputs to the RJR algorithm. In channels with delayed photons, the selected photon candidate is included among the visible objects provided to the reconstruction, consistent with the treatment of photons as prompt visible objects within the RJR formalism. Displaced secondary vertices are used for event categorization and region definitions; their associated reconstructed objects (e.g. jets) naturally enter the RJR procedure through the jet collection.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.70\textwidth]{fig/RJR_Decay_Tree.png}
+\caption{Schematic of the RJR decay tree used in this analysis. The proxy pair-production system PP is decomposed into a sparticle system $S$, which is split into the two parent systems $P_a$ and $P_b$. Each parent is further partitioned into a visible system $V_{a,b}$ and an invisible system $I_{a,b}$. In the delayed-photon channel, the selected photon candidate is included among the visible objects.}
+\label{fig:rjr_tree}
+\end{figure}
+
+The observed missing transverse momentum is interpreted as the vector sum of the transverse momenta of the invisible systems,
+\begin{equation}
+\vec{p}*{\mathrm{T}}^{,\text{miss}} = \vec{p}^{,I_a}*{\mathrm{T}} + \vec{p}^{,I_b}_{\mathrm{T}}.
+\end{equation}
+The remaining kinematic degrees of freedom, including the partitioning of the invisible momentum between $I_a$ and $I_b$ and the unmeasured longitudinal components, are fixed by a set of deterministic jigsaw rules that enforce consistency with the assumed decay topology and yield a unique event interpretation~\cite{Jackson_2017_RJR}.
+
+Combinatorial ambiguities arising from the assignment of visible objects to the two parent systems are resolved using a deterministic hemisphere-partitioning algorithm. Following the standard RJR prescription, the visible objects are divided into two hemispheres such that the resulting configuration is most consistent with a two-body decay, typically achieved by minimizing the reconstructed hemisphere masses in the relevant proxy frame~\cite{ATLAS_2018_RJR_JetMET_36fb}.
+
+%\subsubsection{RJR observables}
+
+The reconstructed decay tree defines a hierarchy of reference frames, including the laboratory frame and proxy rest frames associated with the PP system and the individual parent systems $P_{a,b}$. Within these frames, RJR observables are constructed to probe both the overall energy scale of the event and the balance between the two decay chains, while maintaining reduced sensitivity to variations in jet multiplicity and to soft or collinear radiation~\cite{Jackson_2017_RJR,Jackson_2017_SparticlesInMotion}.
+
+Energy-scale observables are formed from reduced sets of effective visible and invisible four-vectors obtained via an iterative recombination procedure. In a given frame, visible objects are successively combined until a fixed number of effective visible vectors remains, choosing at each step the pair with the smallest mutual four-vector dot product; an analogous procedure is applied to the invisible system. Transverse variants are defined by restricting the construction to the transverse plane of the relevant frame~\cite{ATLAS_2018_RJR_JetMET_36fb}.
+
+Two primary RJR observables are used in this analysis:
+\begin{itemize}
+\item \textbf{Event-scale variable $M_S$:} an inclusive transverse energy scale for the reconstructed PP system, computed using up to four effective visible momentum vectors and one effective invisible momentum vector. The numerical implementation corresponds to $M_S \equiv H^{PP}*{T,4,1}$~\cite{ATLAS_2018_RJR_JetMET_36fb}.
+\item \textbf{Hemisphere-balance variable $R_S$:} a dimensionless ratio comparing the characteristic transverse scales of the two parent systems to that of the overall PP system, defined as $R_S \equiv \left(H^{P_a}*{1,1} + H^{P_b}*{1,1}\right)/H^{PP}*{2,2}$~\cite{ATLAS_2018_RJR_JetMET_36fb}.
+\end{itemize}
+
+The variable $M_S$ serves as an RJR-optimized effective mass and is sensitive to the underlying mass scale of heavy-particle pair production, while remaining robust against variations in jet multiplicity through controlled recombination of visible momenta~\cite{Jackson_2017_SparticlesInMotion}. The ratio $R_S$ quantifies the compatibility of the event with a symmetric two-branch topology: signal events tend to populate larger values of $R_S$, whereas backgrounds with unbalanced visible activity or mis-measured $\vec{p}_{\mathrm{T}}^{,\text{miss}}$ typically yield smaller values~\cite{ATLAS_2018_RJR_JetMET_36fb}.
+
+%\subsubsection{Expected behavior and validation}
+
+For signal hypotheses involving the pair production of heavy colored states, $M_S$ increases with the characteristic mass scale of the process and retains discrimination power even when visible activity is softened by long-lived decays, acceptance effects, or event-level recoil. Standard model backgrounds generally populate lower values of $M_S$, with the high-$M_S$ tail dominated by events containing hard initial-state radiation or large instrumental missing transverse momentum~\cite{ATLAS_2018_RJR_JetMET_36fb}.
+
+Similarly, signal events with approximately symmetric decay chains tend to yield larger values of $R_S$, while backgrounds with strongly asymmetric kinematics?such as events dominated by a single energetic hemisphere?populate smaller values of $R_S$. The modeling of $M_S$ and $R_S$ is validated in dedicated control regions enriched in the dominant SM processes and in sideband regions used by the data-driven background estimation. These studies include data-to-simulation comparisons and closure tests, ensuring that the use of RJR observables for event categorization does not introduce bias in the background prediction.
+
+%\subsubsection{Role of RJR in region definition and fit strategy}
+
+The RJR framework provides a compact and physically motivated description of event-level kinematics that is particularly well suited to final states containing delayed photons and displaced secondary vertices. In these channels, the presence of non-prompt visible objects and genuine invisible momentum degrades the performance of traditional laboratory-frame variables such as $H_T$ or $M_{\mathrm{eff}}$. By construction, the RJR observables $M_S$ and $R_S$ retain sensitivity to the underlying pair-production topology while remaining robust against displaced decay topologies, timing effects, and variations in visible object multiplicity. As a result, these variables form the basis for the definition of analysis regions and provide the primary inputs to the statistical interpretation described in the following section, where they are used to separate background-dominated control regions from signal-enhanced regions and to parameterize the kinematic dependence of the likelihood fit.
+
+
+
+
+\subsubsection{Event partitioning and input objects}
+\label{sec:rjr_inputs}
+
+The RJR procedure requires a well-defined set of input objects and a deterministic partition of the visible system into the two parent hemispheres $V_a$ and $V_b$. Jets passing the analysis-quality requirements constitute the baseline visible collection. In channels with delayed photons, the selected photon candidate is included among the visible objects used in the reconstruction. The invisible system is represented by the measured $\vec{p}_{\mathrm{T}}^{\,\text{miss}}$, interpreted as the sum of the invisible transverse momenta associated with $I_a$ and $I_b$.
+
+In the RJR interpretation, all reconstructed objects assigned to the visible systems $V_a$ and $V_b$ are taken from the analysis object collections (jets in all channels, and the selected photon candidate in the delayed-photon channel). The invisible system is represented by the event $\vec{p}_{\mathrm{T}}^{\,\text{miss}}$, which captures the net transverse momentum carried by particles not reconstructed in the detector acceptance, including neutrinos from SM processes and weakly interacting particles in signal models (e.g.\ the lightest SUSY particle). The partition of the invisible transverse momentum between $I_a$ and $I_b$ is determined by the jigsaw rules within the assumed decay tree, yielding a unique event interpretation used to compute the RJR observables~\cite{Jackson_2017_RJR}.
+
+The assignment of visible objects to $V_a$ and $V_b$ is performed using a deterministic criterion designed to yield hemispheres compatible with a two-parent decay topology. In practice, candidate partitions are evaluated in the relevant proxy frame and the partition that yields the most symmetric two-hemisphere configuration is selected~\cite{ATLAS_2018_RJR_JetMET_36fb}. This choice reduces combinatorial sensitivity and improves the stability of the resulting RJR observables across varying jet multiplicities.
+
+
+

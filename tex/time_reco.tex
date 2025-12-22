@@ -1,32 +1,71 @@
-The ECAL measures both the energy deposited in the calorimeter by incident particles, and the time at which that energy was deposited. In both cases these measurements are extrapolated from the scintillating light pulse produced when the incident particle interacts with the PbWO$_{4}$ crystal.  When a particle is incident in a PbWO$_{4}$ crystal, it will produce an electromagnetic shower of electron - positron pairs and photons. The showering particles will dissipate their energy through ionization, leading to the excitation of the scintillating centers of the PbWO$_{4}$ crystal. The scintillating centers will de-excite producing a pulse of scintillating light at a specific wavelength that is proportional to the energy of the original, incident particle. The "signal" pulse is amplified and shaped by the readout electronics, thereby defining the shape of the pulse \cite{Karimäki:368412}. This shape is constant for all sampled pulses in a particular crystal ( or channel ) and is very well known. Ten consecutive amplitude samples of this "signal" pulse are recorded. In Figure~\ref{tec_pulseshape} the time structure of a typical signal pulse shape as measured after amplification (solid line) is shown. The normalized amplitude of the pulse, $A/A_{max}$, is a function of the time difference T-T$_{max}$, where T$_{max}$ is defined as the time when the pulse reaches its maximum value. The dots are the ten discrete samples of the pulse amplitude.
-%, as typical in a single event, with the pedestal amplitude subtracted and normalized to the maximum amplitude. 
+The ECAL measures both the energy deposited by incident particles and the time at which that energy is deposited.
+In both cases, these quantities are inferred from the scintillation light pulse produced when an incident particle interacts with a PbWO$_4$ crystal.
+An electromagnetic particle incident on a PbWO$_4$ crystal initiates an electromagnetic shower consisting primarily of electrons, positrons, and photons.
+As the shower particles lose energy through ionization, scintillation centers in the crystal are excited and subsequently de-excite, emitting scintillation light at a characteristic wavelength.
+The total emitted light is proportional to the energy deposited by the incident particle.
+
+The scintillation signal is amplified and shaped by the front-end readout electronics, which define a characteristic pulse shape~\cite{Karimaki:368412}.
+For a given crystal channel, this pulse shape is stable and well characterized.
+Ten consecutive samples of the pulse amplitude are recorded for each event.
+Figure~\ref{tec_pulseshape} shows a typical ECAL pulse shape after amplification (solid line), together with the ten discrete amplitude samples (points).
+The normalized pulse amplitude, $A/A_{\mathrm{max}}$, is shown as a function of the time difference $T - T_{\mathrm{max}}$, where $T_{\mathrm{max}}$ denotes the time at which the pulse reaches its maximum value.
 
 \begin{figure}[htbp]
 \begin{center}
 \resizebox{0.75\linewidth}{!}{\includegraphics{fig/sec_reco/pulse_template.png}}
-\caption{The typical pulse shape measured in the ECAL, as a function of the difference between the time (T) of the ADC sample and the time (Tmax) of the maximum of the pulse and the amplitude of the pulse (A) normalized by the maximum amplitude of the pulse (A$_{max}$).  The dots indicate ten discrete samples of the pulse as taken from a single event with the pedestal ( the amplitude measured when no pulse is present ) subtracted.}
+\caption{Typical ECAL pulse shape as a function of the difference between the ADC sample time $T$ and the pulse maximum time $T_{\mathrm{max}}$.
+The amplitude $A$ is normalized to the maximum pulse amplitude $A_{\mathrm{max}}$.
+The solid line shows the expected pulse shape after amplification, while the points indicate the ten discrete samples recorded for a single event, with the pedestal subtracted.}
 \label{tec_pulseshape}
 \end{center}
 \end{figure}
 
-During LHC Run II, from 2015 through 2018, the instantaneous luminosity, and therefore the number of interactions in each collision event, or bunch crossing (BX), increased by a factor of two compared to Run I. These conditions placed much more stringent requirements on the ECAL pulse amplitude reconstruction algorithm. In more detail, the LHC beams are composed of bunches of protons that are localized in buckets dictated by the RF cavity frequency of the LHC. When two bunches of protons cross in the center of the detector, thus producing proton-proton collisions, it is referred to as a bunch crossing. With the increase in luminosity in Run II, the number of inelastic collisions occurring during a BX, referred to as pile-up ( PU ), at the LHC increased to an average of forty. This results in an increase in the amount of particles interactions recorded during a single BXing.  In addition, the spacing between BXs was reduced from 50 ns to 25 ns. With this shortened spacing between BXings it becomes more likely that interactions with particles originating in collisions that occurred in the previous BXing are recorded in the current BXing. This is referred to as out of time pile-up ( OOT-PU ). The net result is that the observed pulse shape of a signal in the ECAL is a superposition of a nominal, or in-time, pulse that is of interest and multiple, non-negligible, out-of-time (OOT) pulses that originate in both PU and OOT-PU interactions. This is demonstrated in Figure~\ref{tec_multifit2} with a single OOT pulse for clarity. To account for the increase in both in-time PU and OOT-PU, a template fit with multiple components, termed "multi-fit", was implemented for the ECAL energy reconstruction. 
+During LHC Run~II (2015--2018), the instantaneous luminosity increased significantly relative to Run~I, resulting in a substantial rise in the number of interactions per bunch crossing (BX).
+At the LHC, proton beams are composed of discrete bunches confined in radio-frequency buckets, and a \emph{bunch crossing} corresponds to the moment when two such proton bunches pass through one another at the interaction point.
+Each bunch crossing therefore represents a single opportunity for one or more proton--proton interactions to occur and be recorded by the detector.
 
-\begin{equation}\label{en-mf}
-    \chi^{2} = \sum^{N}_{i=1} \frac{(\sum^{M}_{j=1} A_{j}p_{ij} - S_{i} )^{2}}{\sigma^{2}_{S_{i}}}\qquad
+With the increased luminosity in Run~II, the average number of inelastic proton--proton interactions per BX, referred to as pileup (PU), rose to approximately forty.
+These conditions placed significantly more stringent requirements on the ECAL pulse amplitude and time reconstruction, as an increased density of particle interactions contributes energy deposits within a single detector readout window.
+
+In addition, for Run~II the spacing between bunch crossings was reduced from 50\,ns to 25\,ns.
+With this reduced spacing, scintillation signals from particles produced in preceding or subsequent bunch crossings can overlap with the signal from the interaction of interest.
+Such contributions are referred to as out-of-time pileup (OOT-PU).
+As a result, the observed ECAL pulse shape is generally a superposition of an in-time pulse and multiple non-negligible out-of-time pulses originating from both PU and OOT-PU interactions.
+This effect is illustrated in Fig.~\ref{tec_multifit2}, where a single OOT pulse is shown for clarity.
+
+To account for the presence of both in-time and out-of-time contributions, a template-based multi-component fit, referred to as the \emph{multi-fit} algorithm, was introduced for ECAL energy reconstruction.
+The algorithm estimates the in-time signal amplitude together with amplitudes from up to nine out-of-time contributions by minimizing the $\chi^{2}$ defined as
+\begin{equation}
+    \chi^{2} = \sum_{i=1}^{N} \frac{\left( \sum_{j=1}^{M} A_{j} p_{ij} - S_{i} \right)^{2}}{\sigma^{2}_{S_{i}}} \, ,
+    \label{en-mf}
 \end{equation}
+where $S_{i}$ denotes the measured amplitude of the $i$th sample, $\sigma^{2}_{S_{i}}$ is the corresponding electronic noise variance, and $p_{ij}$ represents the pulse template for the $j$th bunch crossing contribution evaluated at sample $i$.
+The amplitudes $A_{j}$ correspond to the in-time signal and up to $M=10$ out-of-time signals, with templates shifted in time by integer multiples of 25\,ns over a range of $-5$ to $+4$ BXs relative to the in-time interaction.
 
-The multi-fit algorithm estimates the in-time signal amplitude and up to nine OOT amplitudes through the minimization of the $\chi^{2}$ given in Equation~\ref{en-mf}. In this equation, $A_{j}$ are the amplitudes, $j$, of up to ten, $M = 10$, events. The pulse templates $p_{ij}$ for each $BX_{j}$ have the same characteristic shape, but are shifted in time by multiples of 25 ns ( the frequency at which the pulse amplitudes are sampled ) within a range of $-5$ to $+4$ BXs around the time of the in-time signal at BX zero.  The pulse shapes for each crystal were measured from low pileup $pp$ collision data recorded by CMS at the beginning of 2015 and a periodically updated library of these pulse shape templates is maintained.  Noise generated by electronics associated with the crystal readout chain is characterized by $\sigma^{2}_{S_{i}}$ and is measured from dedicated pedestal runs.  The technique of Non-Negative-Least-Squares is used to perform the $\chi^{2}$ minimization of Equation~\ref{en-mf} with the constraint that the fitted amplitudes are all positive \cite{massironi2015precision}. Information reconstructed for a pulse, resultant from a particle that has hit a crystal, is referred to as a reconstructed hit or a rechit. While the process of determining the energy for a rechit involves some technical details not discussed here, it is sufficient for our purpose to say that the pulse amplitude determined by the multi-fit algorithm is multiplied by a periodically calibrated constant, per crystal, to determine the energy. 
+The pulse templates are derived from low-pileup proton--proton collision data recorded by CMS and are maintained in a periodically updated template library.
+The electronic noise term $\sigma^{2}_{S_{i}}$ is determined from dedicated pedestal runs.
+The $\chi^{2}$ minimization is performed using a non-negative least-squares technique, enforcing the physical constraint that all fitted amplitudes are positive~\cite{massironi2015precision}.
+The reconstructed information associated with a particle interaction in a crystal is referred to as a reconstructed hit (rechit).
+The pulse amplitude extracted by the multi-fit algorithm is converted to an energy measurement using calibration constants determined for each crystal.
 
-\hfill
 \begin{figure}[htbp]
 \begin{center}
 \resizebox{0.75\linewidth}{!}{\includegraphics{fig/sec_reco/two_pulses.png}}
-\caption{The fitted pulse for a simulated event with twenty average pileup events and 25 ns bunch spacing as a function of the difference between the time (T) of the ADC sample and the time (Tmax) of the maximum of the pulse and the amplitude of the pulse (A) normalized by the maximum amplitude of the pulse (A$_{max}$). The dots represent the 10 discrete samples of the measured pulse shape (dashed line) that is a superposition of an in-time pulse (solid line) and an OOT pulse (dashed line). 
-%Note that the samples are numbered starting at 0 instead of 1. 
-}
+\caption{Example of a fitted ECAL pulse for a simulated event with an average of twenty pileup interactions and 25\,ns bunch spacing.
+The measured pulse samples (points) are a superposition of an in-time pulse (solid line) and an out-of-time pulse (dashed line).
+The amplitude is normalized to the maximum pulse amplitude $A_{\mathrm{max}}$, and the time axis is shown relative to the pulse maximum $T_{\mathrm{max}}$.}
 \label{tec_multifit2}
 \end{center}
 \end{figure}
 
-The ECAL time reconstruction developed for Run 1 was utilized through the start of Run 3.  With this time reconstruction it was found that the fast time constants of PbWO$_{4}$ scintillation and the response of the readout electronics allows a time resolution on the order of 100's of picoseconds for isolated interactions \cite{Collaboration_2010}.  Residual channel-to-channel time offsets are corrected with appropriate constants derived from data. This timing information, combined with topological information of the energy deposits, is exploited at reconstruction level to reject signals inconsistent with the emission of scintillation light by particles produced in proton-proton collision events. These spurious signals include those arising from direct ionization in the APD sensitive region ( spikes ) as well as signals arising from beam halo muons, cosmic rays, electronic noise, detector material interactions, and OOT-PU. In Run 1 it was found that, for the conditions prevalent at that time, the residual contamination of these spurious deposits has a negligible impact on reconstruction \cite{CMS-NOTE-2010-012}. The signal arrival time for a rechit is reconstructed  by comparing the relative phase of the sample pulse amplitudes to the expected pulse shape. In originally developed algorithm used the ratios of consecutive amplitude samples to reconstruct the time.  This method did not take into account the challenges presented by the increasing PU present in Run 2 and Run 3 to the time reconstruction. The ratio method algorithm, and the challenges it faced, is discussed in Section~\ref{sec:algo1}. In order to account for these changes a new time reconstruction, the cross correlation method ( CC ), was developed during Run 2.  The CC time reconstruction will be  presented in Section~\ref{sec:algo2}.
- 
+The ECAL time reconstruction developed for Run~I was used through the beginning of Run~III.
+Owing to the fast scintillation response of PbWO$_4$ and the characteristics of the readout electronics, this method achieved time resolutions of order several hundred picoseconds for isolated interactions~\cite{Collaboration_2010}.
+Residual channel-to-channel time offsets are corrected using calibration constants derived from data.
+The resulting timing information is used, together with topological and energy-based criteria, to reject spurious signals inconsistent with energy deposits from particles produced in proton--proton collisions.
+Such signals include direct ionization in the avalanche photodiodes (commonly referred to as spikes), as well as contributions from beam halo muons, cosmic rays, electronic noise, interactions in detector material, and OOT-PU~\cite{CMS-NOTE-2010-012}.
+
+In the original implementation, the arrival time of a rechit was reconstructed by comparing the relative phases of the sampled pulse amplitudes to the expected pulse shape using ratios of consecutive samples.
+While effective under the pileup conditions of Run~I, this ratio-based method does not fully account for the increased in-time and out-of-time pileup present in Run~II and Run~III.
+The ratio-based time reconstruction algorithm and its limitations are discussed in Section~\ref{sec:algo1}.
+To address these challenges, a new cross-correlation (CC) timing reconstruction method was developed during Run~II.
+The CC algorithm and its performance are presented in Section~\ref{sec:algo2}.

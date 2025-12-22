@@ -1,106 +1,70 @@
-Anomalous isolated signals with energies that can exceed 100 GeV have been observed in the ECAL. These deposits, called "spikes", occur at a rate that is proportional to the collision rate. These "spikes" create issues for triggering at high luminosity and can cause large biases in the reconstructed energies and times of electrons, photons, jets, and in the computation of the missing transverse energy in an event. Spikes result from particles striking the APDs in the ECAL barrel directly and occasionally cause large anomalous signals through direct ionization of the silicon.\cite{Petyt:2012upa} Spikes predominately deposit energy in a single crystal and are characterized by a "spike" like pulse shape with a fast rise-time and no scintillation component. Typically there is little or no activity in the crystals surrounding the crystal in which the spike occurs, though occasionally a "double" spike does occur where spike-like signals are seen in two adjacent crystals. A rechit that is produced by a spike in a crystal will be referred to as a "spike rechit". The performance of traditional flags to reject spike rechits were studied when used with the CC algorithm. The rechit collections for both the ratio and the CC algorithms were produced and stored without any downstream cleaning, filtering, or calibration for this study. The CC reconstruction was preformed without OOT amplitude corrections to minimize the impact of the energy dependence on the time reconstruction. Such collections will be referred to as "raw" rechit collections.
+Anomalous isolated energy deposits with reconstructed energies that can exceed 100~GeV have been observed in the ECAL.
+These deposits, commonly referred to as \emph{spikes}, occur at a rate proportional to the collision rate and can create significant challenges for triggering at high luminosity.
+If not rejected, spikes can bias the reconstructed energies and times of electrons, photons, jets, and the missing transverse momentum in an event.
+In the ECAL barrel, spikes originate primarily from particles directly striking the avalanche photodiodes (APDs), producing large signals through direct ionization in the silicon sensor~\cite{Petyt:2012upa}.
+Spike energy is typically concentrated in a single crystal and is characterized by a fast-rising pulse shape with little or no scintillation component.
+In most cases there is minimal activity in neighboring crystals, although occasional ``double spikes'' produce spike-like signals in two adjacent crystals.
+A reconstructed hit (rechit) produced by a spike is referred to as a \emph{spike rechit}.
 
+The performance of standard spike-rejection flags is studied in the context of the CC timing reconstruction.
+For this study, rechit collections are produced for both the ratio and CC timing methods and stored directly as output of the corresponding reconstruction modules, without downstream cleaning, filtering, or timing calibration.
+The CC reconstruction is performed without the OOT amplitude correction to minimize time-dependent effects arising from the energy reconstruction.
+These collections are referred to as \emph{raw} rechit collections.
 
-% ... reject spike rechits were studied when used with the CC algorithm in runs 316241 - 316245 in the 2018A era. 
-%-------------------------------- notes
-%\textcolor{red}{ecal spikes are bvlaaa   ~cit a brief intro expand on spikes and why we are looking at them, comment on why the "spike" bump is not displaced as much as the ratio ( KUCC not sensitive to fast rise time of spike pulses ) }
-\hfill
 \begin{figure}[h!tbp]
 \begin{center}
 \resizebox{0.75\textwidth}{!}{\includegraphics{fig/sec_gen/tr_hl_spike_distro_10062022142744.png}}
-\caption{The distribution of the rechit times reconstructed using the ratio algorithm and the CC algorithm are plotted. The distributions were plotted for a rechits with energy $>4$ GeV. Full rechit collections are produced for both the ratio and CC reconstruction. These collections were saved as output by the producers without downstream cleaning, filtering, or calibrations. The bumps in the distributions located at roughly -10 ns in the distribution for the ratio method and -5 ns for the CC method correspond to spike rechits.}
-%produced in runs 316241-316457 of Run 2018A and 
+\caption{Distribution of rechit times reconstructed with the ratio method and the CC method for rechits with energy $>4$~GeV, using raw rechit collections saved without downstream cleaning, filtering, or calibration.
+Secondary structures at approximately $-10$~ns (ratio) and $-5$~ns (CC) are dominated by spike rechits.}
 \label{raw_distro}
 \end{center}
 \end{figure}
 
-In Figure~\ref{raw_distro} the distribution of the rechit times in the raw collections for both the CC and ratio method is shown for rechits in which the rechit energy is $>4$ GeV. The bumps located at roughly -10 ns in the distribution for the ratio method and -5 ns for the CC method correspond to rechits resulting from spikes. In Figure~\ref{2d_raw_distro_comp} the raw rechit times produced with the CC algorithm are plotted with respect to the raw rechit times produced with the ratio algorithm for rechits with energies between 10 GeV and 120 GeV. In this plot we can see that there is a strong correlation between the reconstructed times for the two methods. It can also be seen that the CC method produces a much narrower spread for prompt times than the ratio method. The "spike" rechit population is located between -6 ns and -15 ns on the ratio time axis and between -2 ns and -10 ns on the CC time axis.
+Figure~\ref{raw_distro} shows the rechit time distributions in the raw collections for rechits with energy greater than 4~GeV.
+Secondary structures are observed at approximately $-10$~ns for the ratio method and $-5$~ns for the CC method; these features are dominated by spike rechits.
+Figure~\ref{2d_raw_distro_comp} shows the correlation between the raw CC and ratio rechit times for rechits with energies between 10 and 120~GeV.
+A strong correlation is observed between the reconstructed times obtained with the two methods, while the CC method exhibits a narrower prompt-time population.
+In this sample, spike rechits populate an early-time region spanning approximately $-6$ to $-15$~ns for the ratio method and $-2$ to $-10$~ns for the CC method.
 
-\hfill
 \begin{figure}[h!tbp]
 \begin{center}
 \resizebox{0.7\textwidth}{!}{\includegraphics{fig/sec_gen/tr_2d_RtvCC_spike_10062022125336.png}}
-\caption{The times for raw rechit collections for the CC algorithm and the ratio algorithm is plot with respect to each other for rechit energies between 10 GeV and 120 GeV. It can seen that there is a strong correlation between the reconstructed times for the two methods and that the CC method produces a much narrower spread for prompt times than the ratio method. The "spike" rechits found in the population located between -6 ns and -15 ns for ratio algorithm and between -2 ns and -10 ns for KUCC algorithm.}
+\caption{Correlation of raw rechit times reconstructed with the CC method and the ratio method for rechits with energies between 10 and 120~GeV.
+The CC method exhibits a narrower prompt-time population.
+Spike rechits populate an early-time region at approximately $-6$ to $-15$~ns for the ratio method and $-2$ to $-10$~ns for the CC method.}
 \label{2d_raw_distro_comp}
 \end{center}
 \end{figure}
 
-As was seen in Figure~\ref{raw_distro} and Figure~\ref{2d_raw_distro_comp}, it is characteristic of a spike rechit that the spike-like pulse shape results in a reconstruction with a time that is significantly earlier then for a non-spike rechit. The fast rise-time of the uncharacteristic shape of a spike signal causes the ratio algorithm to reconstruct a significantly earlier time for spike rechits. The CC algorithm is less sensitive to the bias introduced by the fast rise time and reconstructs a time that is less significantly early but still earlier than non-spike rechits. It is also characteristic of a spike rechit that they are isolated from other rechits. Since a crystal with a large energy deposition that is isolated from other crystals with activity is inconsistent with an electromagnetic shower, an isolated rechit would not be expected for non-spike rechits. A spike rechit can then be identified by looking at both the isolation of the rechit and the reconstructed time of the rechit.
+Spike rechits are characterized by reconstructed times that are significantly earlier than those of scintillation-induced signals.
+For spike-like pulse shapes, the fast rise time biases the ratio-based timing reconstruction toward earlier times.
+The CC method is less sensitive to this effect and yields a smaller, though still non-negligible, early-time bias.
+In addition, spike rechits are typically isolated from surrounding activity.
+Since isolated high-energy deposits are inconsistent with electromagnetic shower development, spike rejection can exploit both the topology of local energy sharing and the reconstructed time.
 
-\hfill
+The swiss-cross variable characterizes the degree of energy sharing between a crystal with a large deposit and its nearest neighbors, with values closer to one indicating a more isolated deposit.
+The swiss-cross is used to define topological spike-rejection flags, including \texttt{kWeird}, which rejects isolated energy deposits, and \texttt{kDiWeird}, which targets double spikes~\cite{Petyt:2012upa}.
+In addition, a timing-based rechit flag \texttt{kOutOfTime} (\texttt{kOOT}) is defined using energy-dependent time thresholds that may be configured separately for the barrel and endcaps and for different energy ranges.
+This flag defines a time window around the prompt population and marks rechits reconstructed outside this window on either the early or delayed side.
+
 \begin{figure}[h!tbp]
 \begin{center}
 \resizebox{0.375\textwidth}{!}{\includegraphics{fig/sec_gen/tr_2d_CC_swisscross1_10062022134628.png}}
 \resizebox{0.375\textwidth}{!}{\includegraphics{fig/sec_gen/tr_2d_CC_swisscross2_10062022134846.png}}
 \resizebox{0.375\textwidth}{!}{\includegraphics{fig/sec_gen/tr_2d_CC_swisscross3_10062022135015.png}}
-\caption{Swiss-cross is plotted with respect to the CC reconstructed time for rechits with energy $>10$ GeV. In the plot on the top left the full distribution is shown with no spike flag cuts applied. As can be seen, this plot is composed of two populations, "non-spike" rechits spread around a time of 0 ns with a swiss-cross $>0.95$ and "spike" rechits spread around a swiss-cross of 1.0 with a "bump" located roughly at a time of -5.0 ns. In the plot on the right the topological flags are applied as cuts to reject spike rechits. With these cuts most of the "spike" rechits are rejected with the exception of "bump" located roughly at -5.0 ns. In the bottom plot the kOOT flag cut is also applied in addition to the topological cuts.  For the kOOT flag a value of 3 ns is used for all threshold parameters. Here it is seen that all "spike" rechits are rejected.}
+\caption{Swiss-cross as a function of CC reconstructed rechit time for rechits with energy $>10$~GeV.
+Left: distribution without spike-rejection cuts, showing a prompt population and a spike-dominated population at large swiss-cross values and early reconstructed times.
+Middle: distribution after applying the topological spike-rejection flags (\texttt{kWeird} and \texttt{kDiWeird}), where most spike rechits are removed, though a residual early-time feature remains.
+Right: distribution after additionally applying the \texttt{kOOT} timing flag using a 3~ns threshold for all timing parameters, where the remaining spike population is strongly suppressed.}
 \label{swisscross_CC}
 \end{center}
 \end{figure}
 
-The swiss-cross variable characterizes the energy sharing between a crystal with a high energy signal and its neighboring crystals. The swiss-cross can be thought of as a ratio where the more isolated a rechit is the closer the swiss-cross value is to one. The swiss-cross is used to define two spike rechit rejection flags. The kWeird flag that rejects rejects rechits with isolated energy depositions, and the kDiWeird flag that is designed to reject double spikes.\cite{Petyt:2012upa} The use of the combination of kWierd or kDiWierd is refereed to as topological ( topo ) cuts. In the time reconstruction algorithm a spike rechit rejection flag called kOutOfTime ( kOOT ) is defined based on energy dependent time thresholds that can be set independently for the barrel, the endcaps, and both the high and low energy reconstruction regions. This threshold defines a "window" around the "prompt" times and flags any times that fall outside this window in both the early and delayed sides of the time distribution. 
-%While parameters exist to set the thresholds separately for "early" and "delayed" sides of the time distribution, they are traditionally set to the same values.
+A rechit flagged as \texttt{kOOT} is unlikely to be used in downstream particle reconstruction, and overly aggressive timing thresholds can therefore reduce the reconstructed energy of physics objects.
+It is consequently necessary to tune the \texttt{kOOT} thresholds for the CC time reconstruction to maximize spike rejection while minimizing impact on prompt scintillation signals across the full rechit energy range.
+Since CC reconstructed times exhibit a different energy dependence than ratio reconstructed times, the optimal \texttt{kOOT} parameter values for low- and high-energy rechits must be determined independently.
 
-In Figure~\ref{swisscross_CC} the swiss-cross is plotted with respect to the CC reconstructed time for rechits with energy $>10$ GeV. In the plot on the top left the full distribution with no spike rechit cuts applied. As can be seen, this plot is composed of two populations, "non-spike" rechits spread around a time of 0 ns with a swiss-cross $>0.95$ and "spike" rechits spread around a swiss-cross of 1.0 with a "bump" located roughly at a time of -5.0 ns. In the plot on the right, the topological cuts are applied. With these cuts most of the "spike" rechits are rejected with the exception of "bump" located roughly at -5.0 ns. In the bottom plot the kOOT flag is applied in addition to the topological cuts. In this plot a threshold value of 3 ns is used for all kOOT threshold parameters as is the default in the ratio algorithm. In this plot it can be seen that the majority of "spike like" rechits are rejected.
-
-If a rechit is flagged as kOOT, that rechit is much less likely to be utilized in down stream particle reconstruction and thereby impacting the energy of these reconstructed particles.  In order to avoid adverse impact on the energies of the reconstructed particles it was necessary to carefully tune the thresholds used to set the kOOT flag with the CC time reconstruction. Since times reconstructed with the CC algorithm depends on the amplitudes it a significantly different manner then the ratio reconstruction, the thresholds for low and high energies tuned independently.  Appropriate thresholds where determined in order to maximize spike rechit rejection, as seen in Figure~\ref{swisscross_CC} , without negatively impacting the down stream particle reconstruction, across all reconstructed rechit energies.
-
-%it was necessary to separately tune the thresholds for low and high energies.  Several studies were conducted to fine tune the kOOT threshold parameters in order to maximize spike rechit rejection without negatively impacting the down stream particle reconstruction across all reconstructed rechit energies.   
-
-%To fully characterize the performance of the spike rechit rejection flags, a spike rechit rejection "efficiency" is defined and plotted with respect to the rechit energy. In order to do this a criteria to select "spike" rechits is needed. A rechit is defined as "isSpike" if its swiss-cross is $>0.95$. With this a "Spike" rechit rejection "efficiency" ($\epsilon_{Spike}$) is defined in Equation~\ref{spike_eff}.
-
-% \rm{} removes itailics   or \mathrm{}   \texttt{}  and texgt scaling set font size
-% define a symbol  and use logic symbols
-%\begin{equation}\label{spike_eff}
-%\epsilon_{Spike}= \frac{\mathrm{isSpike\,\&\&\,}(\mathrm{kWeird\,||\,kDiWeird\, ||\,kOOT})}{\mathrm{isSpike}}\quad
-%\end{equation}
-
-%In Figure~\ref{spike_reject} $\epsilon_{Spike}$ is plotted with respect to the rechit energy for both the ratio and KUCC method, where the kOOT flag is produced using the default ratio values, for rechits with an energy $>4$ GeV. At rechit energies $>~30$ GeV the $\epsilon_{Spike}$ for both KUCC and ratio methods approaches 100\%. For energies $<~30$ GeV, $\epsilon_{Spike}$ for the KUCC method closely aligns with the $\epsilon_{Spike}$ seen for the ratio method. It is important to note that the "isSpike" criteria is a loose selection for spike-like rechits and that $\epsilon_{Spike}$ is dependent on the kOOT flag production parameters chosen.
-
-%\hfill
-%\begin{figure}[h!tbp]
-%\begin{center}
-%\resizebox{0.7\textwidth}{!}{\includegraphics{fig/sec_gen/swisscross_CC_topo.png}}
-%\caption{caption needed 
-%\textcolor{red}{? place holder ?}
-%}
-%\label{swisscross_CC_topo}
-%\end{center}
-%\end{figure}
-
-%\hfill
-%\begin{figure}[h!tbp]
-%\begin{center}
-%\resizebox{0.7\textwidth}{!}{\includegraphics{fig/sec_gen/swisscross_CC_time.png}}
-%\caption{caption needed 
-%\textcolor{red}{? place holder ?}
-%}
-%\label{swisscross_CC_time}
-%\end{center}
-%\end{figure}
-
-%\hfill
-%\begin{figure}[h!tbp]
-%\begin{center}
-%\resizebox{0.7\textwidth}{!}{\includegraphics{fig/sec_gen/tr_hl_spike_eff_10062022141907.png}}
-%\caption{$\epsilon_{Spike}$ is plotted with respect to the rechit energy for both the ratio and KUCC method for rechits with an energy $>4$ GeV. At rechit energies $>~30$ GeV the $\epsilon_{Spike}$ for both KUCC and ratio methods approaches 100\%. For energies $<~30$ GeV, $\epsilon_{Spike}$ is very close to that shown by the ratio method but slightly degraded with the threshold value used to set the kOOT flag.}
-%\label{spike_reject}
-%\end{center}
-%\end{figure}
-
-%The threshold parameters to be utilized to set the kOOT flag in KUCC algorithm were determined by studying the dependence of $\epsilon_{Spike}$ with respect to the "notSpike" RH rejection "effeciency" ($\epsilon_{notSpike}$) as defined in Equation~\ref{notspike_eff} in a "ROC" style plot.
-
-%\begin{equation}\label{notspike_eff}
-%\epsilon_{notSpike}= \frac{\mathrm{!\,isSpike\,\&\&\,}(\mathrm{kWeird\,||\,kDiWeird\, ||\,kOOT})}{\mathrm{!\,isSpike}}\quad
-%\end{equation}
-
-%In this plot, shown in Figure~\ref{spikr_reject_roc}, it is important to note that these values do not correspond to any "truth labeled" data and is only used for performance comparisons in order to make an informed decisions when selecting threshold parameters. As can be seen in this plot, a number of thresholds were studied for the KUCC method (green triangles) including both symmetric thresholds where the parameters for the early and delayed sides of the distribution are set the same value, and asymmetric thresholds where a different value for the two parameters is set. For reference the data point for the ratio method with the default symmetric threshold at 5 ns is shown (black inverted triangle). It was determined that a symmetrical threshold parameterization that erred on the side of a better $\epsilon_{Spike}$ was preferable. Given this criteria there kOOT parameters for the KUCC method are set to 2.25 ns. This selection gives a $\epsilon_{Spike}$ of $\sim$0.985\% and a $\epsilon_{notSpike}$ of $\sim$0.025\%. the same parameters as determined for EB are also used for the EE parameters.
-
-%\hfill
-%\begin{figure}[h!tbp]
-%\begin{center}
-%\resizebox{0.7\textwidth}{!}{\includegraphics{fig/sec_gen/tr_hl_spike_roc_22062022103006.png}}
-%\caption{$\epsilon_{Spike}$ is plotted with respect to $\epsilon_{notSpike}$ for different parameter settings for the kOOT flag produced for the KUCC method (blue triangles) including both symmetric thresholds where the parameters for the early and delayed sides of the distribution are set the same value, and asymmetric thresholds where a different value for the two parameters is set. For reference the data point for the ratio method with the default symmetric threshold at 5 ns is shown (black square). It is important to not that these values do not correspond to any "truth labeled" data.}
-%\label{spikr_reject_roc}
-%\end{center}
-%\end{figure}
+Based on these studies, the \texttt{kOOT} timing thresholds for the CC reconstruction are tuned to achieve efficient rejection of spike rechits while preserving prompt scintillation signals across the full rechit energy range.
+Separate threshold values are optimized for low- and high-energy rechits to account for the energy dependence of the CC reconstructed time.
+The selected parameter configuration provides strong suppression of spike-induced early-time populations with minimal impact on downstream particle reconstruction.
+Unless otherwise stated, this tuned \texttt{kOOT} configuration is used for the CC timing reconstruction in all subsequent performance studies presented in this paper.
